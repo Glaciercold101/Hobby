@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Beekeeper's Compendium - Christopher Azeem</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600,50,1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--honey:#F6B40A;--honey-dark:#E8A200;--brown:#2E1F0F;--brown-soft:#5D4037;--cream:#FFFBEB;--cream-2:#FFF8E1;--sage:#E8EFE6;--ink:#1A1A18;--line:#EDE5D3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;letter-spacing:-0.02em;color:var(--brown);line-height:1.15}
+.wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:0}
+.toc{position:sticky;top:0;height:100vh;overflow:auto;padding:28px 18px;background:#1C1308;color:#EDE5D3;border-right:1px solid #2a2014}
+.toc .brand{font-family:Fraunces;font-size:1.55rem;color:var(--honey);margin-bottom:4px}
+.toc .sub{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.6;margin-bottom:20px;line-height:1.4}
+.toc nav a{display:block;padding:8px 12px;border-radius:8px;color:#CFC6B0;text-decoration:none;font-size:13.5px;margin-bottom:3px}
+.toc nav a:hover{background:rgba(246,180,10,0.12);color:var(--honey)}
+.toc nav a.active{background:var(--honey);color:#1C1308;font-weight:600}
+.toc .gallery-btn{margin-top:16px;background:var(--honey);color:#1C1308;padding:10px 14px;border-radius:10px;text-align:center;font-weight:700;text-decoration:none;display:block}
+.toc .note{margin-top:18px;padding:12px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:11px;line-height:1.5}
+main{padding:0}
+.hero{background:radial-gradient(1000px 500px at 85% -10%, #F6B40A 0%, #FFD54F 28%, transparent 60%),linear-gradient(180deg,var(--cream-2),var(--cream));padding:68px 52px 40px;border-bottom:1px solid var(--line)}
+.eyebrow{letter-spacing:0.14em;text-transform:uppercase;font-size:11px;font-weight:700;color:var(--brown-soft);margin-bottom:12px}
+.hero h1{font-size:62px;margin:0 0 14px;max-width:13ch}
+.lead{font-size:18px;max-width:56ch;color:var(--brown-soft);margin:0}
+.hero-meta{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#8D7D65}
+.hero-meta span{background:white;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.honeycomb{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.hex{width:84px;height:72px;background:var(--honey);clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);display:grid;place-items:center;font-weight:800;font-size:18px;color:#2E1F0F}
+.content{padding:32px 52px 80px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 4px 24px rgba(46,31,15,0.04)}
+.card h3{margin:0 0 8px;font-size:19px}
+.card p{margin:0;font-size:14px;color:#4A3E32}
+.card img{width:100%;border-radius:12px;margin:10px 0 6px;border:1px solid var(--line)}
+.section{margin-top:64px;scroll-margin-top:24px}
+.section h2{font-size:36px;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+.section h2 .num{font-size:12px;background:var(--brown);color:var(--honey);padding:4px 9px;border-radius:999px;font-family:Inter}
+.kicker{color:#8D7D65;font-size:14px;margin-bottom:18px;max-width:65ch}
+.fact-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;list-style:none;padding:0;margin:0}
+.fact-list li{background:white;border:1px solid var(--line);border-left:4px solid var(--honey);border-radius:12px;padding:12px 14px;font-size:13.5px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:white;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+th{text-align:left;background:#2E1F0F;color:#FFE082;padding:10px 12px}
+td{padding:9px 12px;border-top:1px solid var(--line)}
+/* Gallery */
+.gallery-controls{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.filter-btn{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:white;font-size:13px;cursor:pointer}
+.filter-btn.active{background:var(--brown);color:var(--honey);border-color:var(--brown)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.gal-item{position:relative;border-radius:16px;overflow:hidden;background:white;border:1px solid var(--line);cursor:pointer;transition:transform .15s}
+.gal-item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(46,31,15,0.12)}
+.gal-item img{width:100%;height:180px;object-fit:cover;display:block}
+.gal-item .cap{padding:10px 12px}
+.gal-item .cap b{display:block;font-size:13px;line-height:1.2}
+.gal-item .cap span{font-size:11px;color:#8D7D65}
+.lightbox{position:fixed;inset:0;background:rgba(28,19,8,0.88);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(90vw,1100px);max-height:85vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.lightbox .close{position:absolute;top:18px;right:18px;background:var(--honey);border:none;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+.lightbox .info{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.92);padding:10px 16px;border-radius:999px;font-size:13px;max-width:90vw;text-align:center}
+@media(max-width:980px){.wrap{grid-template-columns:1fr}.toc{position:relative;height:auto}.hero{padding:28px 20px}.hero h1{font-size:38px}.content{padding:18px}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside class="toc">
+<div class="brand">🐝 Bee Keeping</div>
+<div class="sub">First Style • Site Ready<br>Christopher Azeem • 28 images</div>
+<nav id="tocNav">
+<a href="#start">01 Is it for you?</a>
+<a href="#facts">02 Fascinating Facts</a>
+<a href="#pollination">03 Pollination</a>
+<a href="#history">04 Skep to Modern</a>
+<a href="#colony">05 Inside Colony</a>
+<a href="#castes">06 Meet the Bees</a>
+<a href="#anatomy">07 Anatomy</a>
+<a href="#communication">08 How Bees Talk</a>
+<a href="#produce">09 What Bees Make</a>
+<a href="#hive">10 Your First Hive</a>
+<a href="#handling">11 Handling & Equipment</a>
+<a href="#year">12 Beekeeping Year</a>
+<a href="#swarm">13 Swarm Science</a>
+<a href="#harvest">14 Harvest</a>
+<a href="#gallery">15 Gallery — All Images</a>
+</nav>
+<a class="gallery-btn" href="#gallery">📸 Open Gallery (28)</a>
+<div class="note"><strong style="color:var(--honey)">For upload:</strong> Keep <code>image/</code> folder next to this HTML. All src are <code>image/xxx.png</code>. Dropdown & gallery are vanilla JS, no dependencies.</div>
+</aside>
+<main>
+<div class="hero">
+<div class="eyebrow">Original notes 2016 • Remastered 2026 • Gallery Edition</div>
+<h1>The Beekeeper's Compendium</h1>
+<p class="lead">Your favourite subject — built for the web. Weekly checks, 60,000 flatmates, perfect hexagons and how to steal honey politely. Now with 28 pictures in a linked gallery.</p>
+<div class="hero-meta"><span>📍 Any green space with flowers</span><span>⏱ Weekly late spring</span><span>🐝 1/12 tsp per lifetime</span></div>
+<div class="honeycomb"><div class="hex">60k</div><div class="hex">35°C</div><div class="hex">120°</div><div class="hex">11k</div><div class="hex">27kg</div></div>
+</div>
+<div class="content">
+
+<section id="start" class="section">
+<h2><span class="num">01</span> Is Beekeeping For You?</h2>
+<p class="kicker">Your own words: gentle, observant, neat temperament.</p>
+<div class="grid2">
+<div class="card"><h3>✅ You need</h3><p>Reasonable greenery, local association (advice + insurance), taster day, bee inspectors (free), magazines: Beekeepers Quarterly, Bee Culture, Bee Craft, American Bee Journal.</p><img src="image/apiary_sunrise.png" alt="apiary sunrise"></div>
+<div class="card"><h3>⏳ Time & Sting</h3><p>Not time consuming but weekly late spring–early summer. Bees work on their own time. Sting: swelling, itchy 2 days.</p><img src="image/beekeeper_inspecting.png" alt="beekeeper inspecting"></div>
+</div>
+</section>
+
+<section id="facts" class="section">
+<h2><span class="num">02</span> Fascinating Facts</h2>
+<ul class="fact-list">
+<li>Essential to life. 1/3 of what we eat pollinated.</li>
+<li>Use sun as compass, see UV light.</li>
+<li>Only insect producing human food. Defecates outside in mid-air.</li>
+<li>Wings 11,400/min = buzz. 12-15 mph, 6 miles per trip.</li>
+<li>90,000 miles = 3x globe = 1lb honey. 50-100 flowers per trip.</li>
+<li>Average bee 1/12 tsp lifetime. 556 workers per pound.</li>
+<li>17-20 lbs honey → 1 lb wax.</li>
+<li>Bumblebees solve travelling salesman. Honeycomb 120° perfect hexagon, least wax.</li>
+<li>Honey airtight never spoils — King Tut's tomb edible.</li>
+<li>Bee brain sesame seed but calculates distance & efficiency.</li>
+</ul>
+<div class="grid2" style="margin-top:16px">
+<div class="card"><h3>Compound Eye</h3><img src="image/macro_eye.png" alt="macro eye"><p>5 eyes: 2 compound + 3 ocelli. Sees movement instantly, human movement = aggression.</p></div>
+<div class="card"><h3>Pollen Baskets</h3><img src="image/pollen_basket.png" alt="pollen basket"><p>Hind leg corbicula, colour = flower source. Brushed from body to basket.</p></div>
+</div>
+</section>
+
+<section id="pollination" class="section">
+<h2><span class="num">03</span> Pollination & Importance</h2>
+<div class="card"><p>Bees stay constant to one flower type while it yields — correct pollination, better quality, higher yield, earlier harvest. $8-10B US yearly. Einstein 4-year quote is myth — you flagged doubtful, correct.</p><img src="image/worker_pollen.png" alt="worker pollen"></div>
+</section>
+
+<section id="history" class="section">
+<h2><span class="num">04</span> From Skep to Modern Hive</h2>
+<div class="card"><p><strong>Early:</strong> woven grass baskets, clay, bark, hollow logs — bees killed to harvest. <strong>1852 Reverend Langstroth</strong> discovered bee space, invented movable frame & modern hive. Now observe without killing.</p><img src="image/cross_section.png" alt="hive cross section"></div>
+</section>
+
+<section id="colony" class="section">
+<h2><span class="num">05</span> Inside the Colony</h2>
+<div class="grid2">
+<div class="card"><h3>Annual Cycle</h3><p>Expands spring for nectar flow, contracts into winter cluster. Queen leaves with half workers to make new colony.</p><img src="image/seasons.png" alt="seasons"></div>
+<div class="card"><h3>Nesting</h3><p>Vertical wax combs, chewed with mandibles. Nursery ball 35°C, ring pollen, honey shell insulation. Healthy larvae glistening white.</p><img src="image/larvae_cells.png" alt="larvae"></div>
+</div>
+</section>
+
+<section id="castes" class="section">
+<h2><span class="num">06</span> Meet the Bees</h2>
+<div class="grid2">
+<div class="card"><h3>👑 Queen — 5 years</h3><p>Prime 2 years. Longer abdomen, wings half down. Dark protected centre. Leaves 1-2x year to mate/swarm. Stores sperm in spermatheca, lays 1000/day every 10 sec, 1.5M lifetime. Pheromones control colony.</p><img src="image/queen_bee.png"><img src="image/queen_laying.png" style="margin-top:8px"><table><tr><th>Colour</th><th>Year</th></tr><tr><td>White/Grey</td><td>1/6</td></tr><tr><td>Yellow</td><td>2/7</td></tr><tr><td>Red</td><td>3/8</td></tr><tr><td>Green</td><td>4/9</td></tr><tr><td>Blue</td><td>5/0</td></tr></table></div>
+<div class="card"><h3>👷 Worker — 30d summer / 100d+ winter</h3><p>Female, cannot mate (except laying workers). Age-related jobs: Day1 orienting → 2-6 cleaning → 4-12 feeding brood → 6-18 building → 8-18 storing → 18-21 guarding → 20-end foraging. Glands produce milk, wax, scent.</p><img src="image/bees_fanning.png"><h3 style="margin-top:12px">🚁 Drone — 500-1000/hive</h3><p>Male passengers, larger body stronger wings, cannot sting, fed by workers, roams hives, only job mate queen then dies, DCA congregation.</p><img src="image/drone_bee.png"></div>
+</div>
+</section>
+
+<section id="anatomy" class="section">
+<h2><span class="num">07</span> Anatomy & Superpowers</h2>
+<div class="card"><img src="image/bee_anatomy.png" alt="bee anatomy"><p>Head, thorax, abdomen, 6 legs, 4 wings with tiny teeth locking, 2 antennae, 5 eyes, proboscis straw tongue, mandibles, 2 stomachs (eating + nectar). 4 stages Egg→Larvae→Pupae→Adult.</p></div>
+<div class="grid2" style="margin-top:16px">
+<div class="card"><h3>Capacity</h3><p>One hive 60lb (27kg)+ surplus good season, average 25lb. One frame 2.25kg. Can fill 2/3 boxes/week if nectar. Needs 1L water. Strong colony 2-3x need — surplus is yours.</p><img src="image/capped_honey.png"></div>
+<div class="card"><h3>Sting</h3><p>Only females sting, tears from body → dies. Queen sting repeats vs rival queen only.</p><img src="image/pollen_colorful.png"></div>
+</div>
+</section>
+
+<section id="communication" class="section">
+<h2><span class="num">08</span> How Bees Talk</h2>
+<div class="card"><p><strong>Food sharing:</strong> trophallaxis passes pheromones, learns demand. <strong>Pheromones 17-39 types:</strong> queen safe, alarm, brood recognition, drone, egg marking, footprint, forager.</p><img src="image/bee_dance.png" alt="waggle dance"><p><strong>Dance:</strong> 3 types — swarm new nest, encourage new queen, food. Figure-eight on comb, vigour = richness, rate/duration = distance. Even in dark hot crowded hive.</p></div>
+</section>
+
+<section id="produce" class="section">
+<h2><span class="num">09</span> What Bees Make</h2>
+<div class="grid2">
+<div class="card"><h3>Honey</h3><p>18% water 35% glucose 40% fructose 4% sugars 3% other 181 minor components. White mild expensive, heather best jelly slightly bitter, dark strong darkens. Storage indefinite if &lt;20% water 80% sealed air-tight &lt;10°C. Granulation natural. Fix: soft set warm stir 10% seed, or 42°C 24-48h seed oilseed rape.</p><img src="image/honeycomb.png"><img src="image/honey_jars.png" style="margin-top:8px"></div>
+<div class="card"><h3>Wax, Propolis, Pollen, Nectar</h3><p><strong>Wax:</strong> glands under abdomen, white→dark, 10lb honey→1lb wax. Uses candles, cosmetics, pharma, batik, polish.<br><strong>Propolis:</strong> resin buds wounds + saliva &lt;6mm gaps sealant dark brown antibiotic.<br><strong>Pollen:</strong> protein powder to baskets to brood cells honey preservative.<br><strong>Nectar:</strong> sweet to attract, concentrated + enzymes → honey.</p><img src="image/wax_candles.png"><img src="image/propolis_detail.png" style="margin-top:8px"><img src="image/royal_jelly.png" style="margin-top:8px"></div>
+</div>
+</section>
+
+<section id="hive" class="section">
+<h2><span class="num">10</span> Your First Hive</h2>
+<div class="grid2">
+<div class="card"><h3>Ideal Spec</h3><p>2 cu ft stick ONE size. England Modified National Langstroth. Bee space bee-tight only entrance. Wood 19-22mm pine treated. Wax foundation room temp board flat don't overstock brittle.</p><img src="image/hive_types.png"></div>
+<div class="card"><h3>Types</h3><p>WBC double wall attractive small, Single Commercial Langstroth Dadant bigger National Smith smaller, Rose vertical same size no excluder higher EFB risk, Top Bar horizontal not preference.</p><img src="image/top_bar_hive.png"></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Components A-F</h3><p>A Floor on stand not floor damp creatures Varroa mesh. B Brood 11 frames. C Excluder keeps queen/drones brood wire Waldron gentler. D Supers shorter 3-4 needed above brood. E Crownboard clear bees before harvest. F Roof watertight mesh ventilation.</p><img src="image/cross_section.png"></div>
+</section>
+
+<section id="handling" class="section">
+<h2><span class="num">11</span> Handling & Equipment</h2>
+<div class="card"><img src="image/equipment.png" alt="equipment"><p>Suit all-in-one hood, gloves or rubber washing up, Wellington boots. Never open late night. Mobile if alone. Smoker always lighted masks alarm pheromones doesn't hurt. Fuel coconut husk pinecones cardboard egg boxes wood shavings sack not smelly. Hive Tool Standard J-type brush.</p></div>
+</section>
+
+<section id="year" class="section">
+<h2><span class="num">12</span> Beekeeping Year</h2>
+<div class="card"><img src="image/seasons.png"><p>Autumn feed winter late queen cell close leave spring harvest delay Indian summer Varroa. Winter cluster conserve heat honey energy 5000+queen check debris snow only Varroa make mead candles select survivors move hives green woodpecker mesh. Early Spring Mar 35°C queen lays hefting emergency syrup. Spring Apr willows dandelion oilseed rape first inspection warm after March Ribes sanguineum weekly inspections queen cells space supers under/over old comb water. Late Spring May-Jun swarming Late March-June swarm control swarm=compromised harvest May worth hay July pig's eye honey surplus spring dwindling Nosema brood check queenless unite or brood frame or import queen candy plug. Summer Jul-Aug thousands egg reduce coincide nectar queen drones peak 50000 oilseed rape granulates 10 days shake test weekly swarm not needed twice year main harvest late Jul-early Aug June gap forage gap robbing strong wipe weak reduce entrance soaking cloth Varroa.</p></div>
+</section>
+
+<section id="swarm" class="section">
+<h2><span class="num">13</span> Swarm Science</h2>
+<div class="grid2">
+<div class="card"><h3>Why & Cells</h3><p>Less pheromone + congestion. 3 cell types: Swarm sides/bottom action control, Supersedure face 2-3 none, Emergency sudden loss horizontal extended perfectly good queens Laying workers if no larvae drone eggs high domed scattered multiple per cell remove queen separate add brood.</p><img src="image/swarm_cluster.png"></div>
+<div class="card"><h3>Control & Catch</h3><p>Method A: unsealed queen cells move hive 4ft new box original stand queen cell frame good one +2 honey pollen +1 sealed brood flying bees return fill foundation divide supers feed 3 weeks queen. Method B timely supering before crowded supers above reduce urge deep comb swapping airflow clean excluders open entrance mesh. Catch only clustering Swarm→Cluster→Scouts→Decide→Residence need skep cardboard meshed bucket mesh cloth string spray pliers clothing cloth ground surround sharp blow branch prop edge queen in box workers message. Hiving Running in board 30° cloth over drop bees seek dark walk in cardboard box run up wall roof close turn tip Shaking in remove few frames tip shake branch replace gently.</p><img src="image/winter_cluster.png"></div>
+</div>
+</section>
+
+<section id="harvest" class="section">
+<h2><span class="num">14</span> Harvest Workflow</h2>
+<div class="card"><p>Remove fully capped 7/8 capped. Flow A Harvest B Place frames C Uncapping D Extracting E Filtering F Settling G Bottling H Cleaning I Re-stacking. Sorting supers stand newspapers separate harvesting empty super over brood brush bees porter escape fill gap foundation quickly store bees want back non-harvest supers hive bee-tight entrance reduced tape. Kitchen garage doors locked minutes bees locate. Uncapping separate capping pure cleanest warm gently honey wax similar temp wax settles top heating darkens pollen. Wax collecting combs top bar scrapings capping extracting hot water 64°C not boiling solar under glass container mirror door box steam bag filter bain-marie microwave cloth mould butter containers cubes sell exchange foundation queen excluder cleaned. Extractor floor newspapers fit frame types honey hits wall flows down balance untap before touches frames too fast breaks combs loss drawn. Granulated heated melted separate. Filtering straight extractor conical tap separate bucket double top large bottom finer. Settling 24h bubbles rise bottle store. Re-stacking wet frames super on crown board evening feeding hole open evening prevent robbing above crown board think outside bees clean week store winter.</p><div class="grid2"><img src="image/honey_extractor.png"><img src="image/harvest.png"></div></div>
+</section>
+
+<section id="gallery" class="section">
+<h2><span class="num">15</span> Gallery — All 28 Images Linked</h2>
+<p class="kicker">Click any image to open lightbox. All files live in <code>image/</code> folder you uploaded. Filter by category.</p>
+<div class="gallery-controls">
+<button class="filter-btn active" data-filter="all">All 28</button>
+<button class="filter-btn" data-filter="anatomy">Anatomy</button>
+<button class="filter-btn" data-filter="colony">Colony & Behaviour</button>
+<button class="filter-btn" data-filter="hive">Hives & Equipment</button>
+<button class="filter-btn" data-filter="harvest">Harvest & Produce</button>
+<button class="filter-btn" data-filter="season">Season & Apiary</button>
+</div>
+<div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+</div>
+</main>
+</div>
+
+<div class="lightbox" id="lightbox"><button class="close" onclick="closeLB()">✕ Close</button><img id="lbImg"><div class="info" id="lbInfo"></div></div>
+
+<script>
+const images=[
+{n:"apiary_sunrise.png",t:"Apiary at sunrise meadow",c:"season",d:"Multiple hives in wildflowers"},
+{n:"bee_anatomy.png",t:"Honey bee anatomy diagram",c:"anatomy",d:"Head thorax abdomen 6 legs 4 wings"},
+{n:"bee_dance.png",t:"Waggle dance figure eight",c:"colony",d:"Direction & distance to food"},
+{n:"beekeeper_inspecting.png",t:"Beekeeper inspecting frame",c:"hive",d:"Holding brood frame to sun"},
+{n:"bees_fanning.png",t:"Bees fanning at entrance",c:"colony",d:"Cooling hive by wing fanning"},
+{n:"capped_honey.png",t:"Capped honey frame",c:"harvest",d:"White wax cappings vs uncapped"},
+{n:"cross_section.png",t:"Langstroth cross-section",c:"hive",d:"Roof crownboard supers excluder brood"},
+{n:"drone_bee.png",t:"Drone bee",c:"anatomy",d:"Larger body stronger wings cannot sting"},
+{n:"equipment.png",t:"Beekeeping equipment",c:"hive",d:"Smoker J-tool suit veil gloves brush"},
+{n:"harvest.png",t:"Harvest workflow",c:"harvest",d:"Uncapping & handling supers"},
+{n:"hive_types.png",t:"Hive types WBC National Langstroth",c:"hive",d:"Double vs single wall comparison"},
+{n:"honey_extractor.png",t:"Honey extractor spinning",c:"harvest",d:"Stainless extractor workshop"},
+{n:"honey_jars.png",t:"Honey jars color gradient",c:"harvest",d:"White to dark amber heather"},
+{n:"honeycomb.png",t:"Golden honeycomb dripping",c:"harvest",d:"Perfect 120° hexagons"},
+{n:"larvae_cells.png",t:"Glistening white larvae",c:"anatomy",d:"Healthy brood nursery ball 35°C"},
+{n:"macro_eye.png",t:"Compound eye macro",c:"anatomy",d:"Hexagonal ommatidia lenses"},
+{n:"pollen_basket.png",t:"Pollen basket corbicula",c:"anatomy",d:"Hind leg pollen transport"},
+{n:"pollen_colorful.png",t:"Rainbow pollen cells",c:"harvest",d:"Different flower colors in comb"},
+{n:"propolis_detail.png",t:"Propolis bee glue",c:"harvest",d:"Dark brown resin sealant"},
+{n:"queen_bee.png",t:"Queen with court",c:"anatomy",d:"Longer abdomen wings half back"},
+{n:"queen_laying.png",t:"Queen laying egg",c:"anatomy",d:"Abdomen in cell laying"},
+{n:"royal_jelly.png",t:"Royal jelly queen cells",c:"harvest",d:"Milky substance for queen & larvae"},
+{n:"seasons.png",t:"Beekeeping year seasonal wheel",c:"season",d:"Spring summer autumn winter tasks"},
+{n:"swarm_cluster.png",t:"Swarm cluster on branch",c:"colony",d:"Thousands tracking queen"},
+{n:"top_bar_hive.png",t:"Top bar horizontal hive",c:"hive",d:"Natural garden style"},
+{n:"wax_candles.png",t:"Beeswax candles",c:"harvest",d:"Rolled pillars votives bee shapes"},
+{n:"winter_cluster.png",t:"Winter cluster thermal",c:"colony",d:"35°C core conserving heat"},
+{n:"worker_pollen.png",t:"Worker with pollen baskets",c:"anatomy",d:"Yellow pollen pellets hind legs"},
+];
+const grid=document.getElementById('galleryGrid');
+function render(filter){
+grid.innerHTML='';
+images.filter(im=>filter==='all'||im.c===filter).forEach(im=>{
+const div=document.createElement('div');div.className='gal-item';div.dataset.cat=im.c;
+div.innerHTML=`<img src="image/${im.n}" alt="${im.t}" loading="lazy"><div class="cap"><b>${im.t}</b><span>${im.d}</span></div>`;
+div.onclick=()=>openLB(im);
+grid.appendChild(div);
+});
+}
+function openLB(im){
+document.getElementById('lbImg').src='image/'+im.n;
+document.getElementById('lbInfo').textContent=im.t+' — '+im.d+' — image/'+im.n;
+document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
+document.querySelectorAll('.filter-btn').forEach(b=>{
+b.addEventListener('click',()=>{
+document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+b.classList.add('active');render(b.dataset.filter);
+});
+});
+render('all');
+// toc active
+const links=document.querySelectorAll('#tocNav a');const secs=[...links].map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const ac=document.querySelector(`#tocNav a[href="#${e.target.id}"]`);if(ac)ac.classList.add('active');}});},{rootMargin:'-40% 0px -50% 0px'});
+secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
